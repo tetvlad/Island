@@ -9,7 +9,6 @@ public class Wolf extends Predator {
         setSpeed(3);
         setMaxPerCell(30);
 
-        // Кого ест Волк исходя из таблицы
         this.eatingProbabilities = Map.of(
                 Horse.class, 10,
                 Deer.class, 15,

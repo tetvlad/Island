@@ -16,19 +16,18 @@ public abstract class Predator extends Animal {
 
         if (eatingProbabilities == null || eatingProbabilities.isEmpty()) return;
 
-        // Ищем жертву в локации
+        // Ищем кого съесть)
         for (Animal prey : location.getAnimals()) {
             if (prey == this || !prey.isAlive()) continue;
 
-            // Проверяем, есть ли жертва в нашем меню (по нашей таблице)
+            // Проверяем, есть ли животное в таблице
             Integer chance = eatingProbabilities.get(prey.getClass());
             if (chance != null) {
                 int roll = ThreadLocalRandom.current().nextInt(100);
                 if (roll < chance) {
-                    prey.die(); // Убиваем жертву
-                    // Увеличиваем сытость, но не больше максимума
+                    prey.die(); // Съедаем животное
                     this.currentSatiety = Math.min(this.maxSatiety, this.currentSatiety + prey.getWeight());
-                    return; // Поел один раз за ход и хватит
+                    return;
                 }
             }
         }
