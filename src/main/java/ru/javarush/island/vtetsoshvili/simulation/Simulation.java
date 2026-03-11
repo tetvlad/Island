@@ -41,7 +41,7 @@ public class Simulation implements Runnable {
         int height = island.getHeight();
         List<Callable<Void>> tasks = new ArrayList<>();
 
-        // 1. Формируем задачи для параллельной обработки локаций (Питание, Размножение, Смерть)
+        // 1. Формируем задачи для параллельной обработки локаций (Питание, Размножение и смерть)
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Location location = island.getLocation(x, y);
@@ -169,18 +169,18 @@ public class Simulation implements Runnable {
             }
         }
 
-        // Формируем строку статистики
+        // Формируем статистику
         StringBuilder statsBuilder = new StringBuilder();
         for (Map.Entry<String, Integer> entry : animalStats.entrySet()) {
             statsBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append(", ");
         }
 
 
-        log.info("Статистика: {}Растения={}, ВСЕГО_ЖИВОТНЫХ={}", statsBuilder.toString(), totalPlants, totalAnimals);
+        log.info("Статистика: {}Растений = {}, Всего животных = {}", statsBuilder.toString(), totalPlants, totalAnimals);
         System.out.println("----------------------------------------------------------------------------------");
 
         if (totalAnimals == 0) {
-            log.warn("Все животные вымерли! Симуляция остановлена.");
+            log.warn("Все умерли! Симуляция остановлена!");
             stop();
             System.exit(0);
         }
